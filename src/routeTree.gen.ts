@@ -9,12 +9,60 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedPinRouteImport } from './routes/_authenticated/pin'
+import { Route as AuthenticatedHistoryRouteImport } from './routes/_authenticated/history'
+import { Route as AuthenticatedFundRouteImport } from './routes/_authenticated/fund'
+import { Route as AuthenticatedDataRouteImport } from './routes/_authenticated/data'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedAirtimeRouteImport } from './routes/_authenticated/airtime'
 import { Route as ApiPublicWebhooksPaystackRouteImport } from './routes/api/public/webhooks/paystack'
 
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/_authenticated/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedPinRoute = AuthenticatedPinRouteImport.update({
+  id: '/_authenticated/pin',
+  path: '/pin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedHistoryRoute = AuthenticatedHistoryRouteImport.update({
+  id: '/_authenticated/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedFundRoute = AuthenticatedFundRouteImport.update({
+  id: '/_authenticated/fund',
+  path: '/fund',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedDataRoute = AuthenticatedDataRouteImport.update({
+  id: '/_authenticated/data',
+  path: '/data',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/_authenticated/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAirtimeRoute = AuthenticatedAirtimeRouteImport.update({
+  id: '/_authenticated/airtime',
+  path: '/airtime',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicWebhooksPaystackRoute =
@@ -26,37 +74,156 @@ const ApiPublicWebhooksPaystackRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/airtime': typeof AuthenticatedAirtimeRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/data': typeof AuthenticatedDataRoute
+  '/fund': typeof AuthenticatedFundRoute
+  '/history': typeof AuthenticatedHistoryRoute
+  '/pin': typeof AuthenticatedPinRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/api/public/webhooks/paystack': typeof ApiPublicWebhooksPaystackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/airtime': typeof AuthenticatedAirtimeRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/data': typeof AuthenticatedDataRoute
+  '/fund': typeof AuthenticatedFundRoute
+  '/history': typeof AuthenticatedHistoryRoute
+  '/pin': typeof AuthenticatedPinRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/api/public/webhooks/paystack': typeof ApiPublicWebhooksPaystackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/_authenticated/airtime': typeof AuthenticatedAirtimeRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/data': typeof AuthenticatedDataRoute
+  '/_authenticated/fund': typeof AuthenticatedFundRoute
+  '/_authenticated/history': typeof AuthenticatedHistoryRoute
+  '/_authenticated/pin': typeof AuthenticatedPinRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/api/public/webhooks/paystack': typeof ApiPublicWebhooksPaystackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/webhooks/paystack'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/airtime'
+    | '/dashboard'
+    | '/data'
+    | '/fund'
+    | '/history'
+    | '/pin'
+    | '/profile'
+    | '/api/public/webhooks/paystack'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/webhooks/paystack'
-  id: '__root__' | '/' | '/api/public/webhooks/paystack'
+  to:
+    | '/'
+    | '/auth'
+    | '/airtime'
+    | '/dashboard'
+    | '/data'
+    | '/fund'
+    | '/history'
+    | '/pin'
+    | '/profile'
+    | '/api/public/webhooks/paystack'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/_authenticated/airtime'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/data'
+    | '/_authenticated/fund'
+    | '/_authenticated/history'
+    | '/_authenticated/pin'
+    | '/_authenticated/profile'
+    | '/api/public/webhooks/paystack'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  AuthenticatedAirtimeRoute: typeof AuthenticatedAirtimeRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedDataRoute: typeof AuthenticatedDataRoute
+  AuthenticatedFundRoute: typeof AuthenticatedFundRoute
+  AuthenticatedHistoryRoute: typeof AuthenticatedHistoryRoute
+  AuthenticatedPinRoute: typeof AuthenticatedPinRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   ApiPublicWebhooksPaystackRoute: typeof ApiPublicWebhooksPaystackRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/pin': {
+      id: '/_authenticated/pin'
+      path: '/pin'
+      fullPath: '/pin'
+      preLoaderRoute: typeof AuthenticatedPinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/history': {
+      id: '/_authenticated/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof AuthenticatedHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/fund': {
+      id: '/_authenticated/fund'
+      path: '/fund'
+      fullPath: '/fund'
+      preLoaderRoute: typeof AuthenticatedFundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/data': {
+      id: '/_authenticated/data'
+      path: '/data'
+      fullPath: '/data'
+      preLoaderRoute: typeof AuthenticatedDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/airtime': {
+      id: '/_authenticated/airtime'
+      path: '/airtime'
+      fullPath: '/airtime'
+      preLoaderRoute: typeof AuthenticatedAirtimeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/webhooks/paystack': {
@@ -71,6 +238,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  AuthenticatedAirtimeRoute: AuthenticatedAirtimeRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedDataRoute: AuthenticatedDataRoute,
+  AuthenticatedFundRoute: AuthenticatedFundRoute,
+  AuthenticatedHistoryRoute: AuthenticatedHistoryRoute,
+  AuthenticatedPinRoute: AuthenticatedPinRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   ApiPublicWebhooksPaystackRoute: ApiPublicWebhooksPaystackRoute,
 }
 export const routeTree = rootRouteImport
