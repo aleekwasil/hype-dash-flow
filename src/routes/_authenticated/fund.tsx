@@ -35,6 +35,13 @@ function Fund() {
   const initMut = useMutation({
     mutationFn: () => i({ data: { amount: Number(amount) } }),
     onSuccess: (res) => {
+      if (res.demo) {
+        toast.success(`Wallet credited (demo mode) — ₦${Number(amount).toLocaleString()}`);
+        setAmount("");
+        qc.invalidateQueries({ queryKey: ["wallet"] });
+        qc.invalidateQueries({ queryKey: ["txns"] });
+        return;
+      }
       window.location.href = res.authorization_url;
     },
     onError: (e: any) => toast.error(e?.message ?? "Init failed"),
